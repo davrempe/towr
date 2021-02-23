@@ -3,6 +3,7 @@
 The original README is below with dependencies and installation instructions. Specifically please follow **Option 1**: building towr from source with cmake. These directions must be followed in order to run this code as part of the contacts and human dynamics pipeline.
 
 Some notes on installation:
+* If using Ubuntu 16.04, it's highly recommended to use install Eigen >= 3.3.1 (I have tested on 3.3.7) to avoid a [problematic memory leak](https://gitlab.com/libeigen/eigen/-/issues/1512).
 * When installing [IPopt] as part of [ifopt], it is recommended to build from source as detailed [here](https://github.com/ethz-adrl/ifopt#additional-information) and [here](https://coin-or.github.io/Ipopt/INSTALL.html) (instead of using the `coinor-libipopt-dev` package). **This is important to enable downloading and installing the HSL routines** while building Ipopt, which are required to use the full version of the contact and human dynamics pipeline (which specifically uses the `MA57` solver). Otherwise only the slower `MUMPS` solver is available.
 
 ## Notable Changes
