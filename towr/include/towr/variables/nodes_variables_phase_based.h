@@ -171,7 +171,7 @@ protected:
 
   void SetNumberOfVariables(int n_variables);
 
-private:
+// private:
   /** @brief semantic information associated with each polynomial */
   std::vector<PolyInfo> polynomial_info_;
 

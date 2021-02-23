@@ -59,7 +59,7 @@ TotalDurationConstraint::GetBounds () const
 {
   // TODO hacky and should be fixed
   // since last phase is not optimized over these hardcoded numbers go here
-  double min_duration_last_phase = 0.2;
+  int min_duration_last_phase = 0.2;
   return VecBound(GetRows(), ifopt::Bounds(0.1, T_total_-min_duration_last_phase));
 }
 

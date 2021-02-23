@@ -224,11 +224,11 @@ NodesVariablesEEMotion::GetPhaseBasedEEParameterization ()
         // Since we often choose two polynomials per swing-phase, this restricts
         // the swing to have reached it's extreme at half-time and creates
         // smoother stepping motions.
-        if (dim == Z)
-          nodes_.at(node_id).at(kVel).z() = 0.0;
-        else
-          // velocity in x,y dimension during swing fully optimized.
-          index_map[idx++].push_back(NodeValueInfo(node_id, kVel, dim));
+        // if (dim == Z)
+        //   nodes_.at(node_id).at(kVel).z() = 0.0;
+        // else
+        // velocity in x,y dimension during swing fully optimized.
+        index_map[idx++].push_back(NodeValueInfo(node_id, kVel, dim));
       }
     }
     // stance node (next one will also be stance, so handle that one too):

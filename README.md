@@ -1,3 +1,17 @@
+# Fork of TOWR for "Contacts and Human Dynamics from Monocular Video"
+
+The original README is below with dependencies and installation instructions. Specifically please follow **Option 1**: building towr from source with cmake. These directions must be followed in order to run this code as part of the contacts and human dynamics pipeline.
+
+Some notes on installation:
+* When installing [IPopt] as part of [ifopt], it is recommended to build from source as detailed [here](https://github.com/ethz-adrl/ifopt#additional-information) and [here](https://coin-or.github.io/Ipopt/INSTALL.html) (instead of using the `coinor-libipopt-dev` package). **This is important to enable downloading and installing the HSL routines** while building Ipopt, which are required to use the full version of the contact and human dynamics pipeline (which specifically uses the `MA57` solver). Otherwise only the slower `MUMPS` solver is available.
+
+## Notable Changes
+* In `towr/include/towr/variables/nodes_variables_phase_based.h`, make `polynomial_info_` public so it can be accessed from the outside.
+* In `towr/src/nodes_variables_phase_based.cc`, comment out the code that requires velocity in the z direction to be 0 and not optimized.
+* In `towr/include/towr/initialization/gait_generator.h`, change uint to unsigned int because of some compilation issues on MacOS.
+
+==================================================================================================================
+
 <img align="right" src="https://i.imgur.com/qI1Jfyl.gif" width="55%"/>
 
 [<img src="https://i.imgur.com/qliQVx1.png" />](https://ieeexplore.ieee.org/document/8283570 "Go to RA-L paper")
@@ -120,7 +134,7 @@ We provide a [ROS]-wrapper for the pure cmake towr library, which adds a keyboar
 #### Library overview
  * The relevant classes and parameters to build on are collected [modules](http://docs.ros.org/api/towr/html/modules.html).
  * A nice graphical overview as UML can be seen [here](http://docs.ros.org/api/towr/html/inherits.html).
- * The [doxygen documentation](http://docs.ros.org/api/towr/html/) provides helpful information for developers.
+ * The [doxygen documentation](http://docs.ros.org/api/towr/html/) provides helpul information for developers.
 
 #### Problem formulation
  * This code formulates the variables, costs and constraints using ifopt, so it makes sense to briefly familiarize with the syntax using [this example].
@@ -132,15 +146,14 @@ We provide a [ROS]-wrapper for the pure cmake towr library, which adds a keyboar
  * This library provides a set of variables, costs and constraints to formulate the trajectory optimization problem. An [example formulation](towr/include/towr/nlp_formulation.h) of how to combine these is given, however, this formulation can probably be improved. To add your own e.g. constraint-set, define a class with it's values and derivatives, and then add it to the formulation ```nlp.AddConstraintSet(your_custom_constraints);``` as shown [here](towr/test/hopper_example.cc).
 
 #### Add your own robot
- * Want to add your own robot to towr? Start [here](http://docs.ros.org/en/melodic/api/towr/html/group__Robots.html).
+ * Want to add your own robot to towr? Start [here](http://docs.ros.org/api/towr/html/group__Robots.html).
  * To visualize that robot in rviz, see [xpp].
+
 
 ## Contribute
 We love pull request, whether its new constraint formulations, additional robot models, bug fixes, unit tests or updating the documentation. Please have a look at [CONTRIBUTING.md](CONTRIBUTING.md) for more information.  
 See here the list of [contributors](https://github.com/ethz-adrl/towr/graphs/contributors) who participated in this project.
 
-## Projects using towr
- * https://github.com/popi-mkx3/popi_project
 
 ## Publications
 All publications underlying this code can be found [here](https://www.alex-winkler.com). 

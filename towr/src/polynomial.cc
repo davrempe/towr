@@ -32,6 +32,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <cassert>
 #include <cmath>
 
+#include <iostream>
+
 
 namespace towr {
 
@@ -244,14 +246,24 @@ CubicHermitePolynomial::GetDerivativeOfPosWrtDuration(double t) const
   double t2 = std::pow(t,2);
   double t3 = std::pow(t,3);
   double T  = T_;
-  double T2 = std::pow(T_,2);
-  double T3 = std::pow(T_,3);
-  double T4 = std::pow(T_,4);
+  double T2 = std::pow(T_,2);// + 1e-3;
+  double T3 = std::pow(T_,3);// + 1e-3;
+  double T4 = std::pow(T_,4);// + 1e-3;
 
   VectorXd deriv = (t3*(v0 + v1))/T3
                  - (t2*(2*v0 + v1))/T2
                  - (3*t3*(2*x0 - 2*x1 + T*v0 + T*v1))/T4
                  + (2*t2*(3*x0 - 3*x1 + 2*T*v0 + T*v1))/T3;
+
+    // std::cout << "T: " << T << std::endl;
+    // std::cout << "T2: " << T2 << std::endl;
+    // std::cout << "T3: " << T3 << std::endl;
+    // std::cout << "T4: " << T4 << std::endl;
+    // std::cout << deriv << std::endl;
+    // std::cout << "C1(T3): " << T << std::endl;
+    // std::cout << "C2(T2): " << T2 << std::endl;
+    // std::cout << "C3(T4): " << T3 << std::endl;
+    // std::cout << "C4(T3): " << T4 << std::endl;
 
   return deriv;
 }

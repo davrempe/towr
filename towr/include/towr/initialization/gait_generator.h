@@ -50,7 +50,7 @@ public:
   using FootDurations = std::vector<VecTimes>;
   using ContactState  = std::vector<bool>;
   using GaitInfo      = std::pair<VecTimes,std::vector<ContactState>>;
-  using EE            = uint;
+  using EE            = unsigned int; //uint;
 
   /**
    * @brief Predefined combinations of different strides.

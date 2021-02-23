@@ -67,6 +67,8 @@ int main()
   formulation.params_.ee_phase_durations_.push_back({0.4, 0.2, 0.4, 0.2, 0.4, 0.2, 0.2});
   formulation.params_.ee_in_contact_at_start_.push_back(true);
 
+  formulation.params_.OptimizePhaseDurations();
+
   // Initialize the nonlinear-programming problem with the variables,
   // constraints and costs.
   ifopt::Problem nlp;
@@ -87,6 +89,8 @@ int main()
   auto solver = std::make_shared<ifopt::IpoptSolver>();
   solver->SetOption("jacobian_approximation", "exact"); // "finite difference-values"
   solver->SetOption("max_cpu_time", 20.0);
+  solver->SetOption("derivative_test", "first-order");
+  solver->SetOption("derivative_test_perturbation", 1e-8); 
   solver->Solve(nlp);
 
   // Can directly view the optimization variables through:
